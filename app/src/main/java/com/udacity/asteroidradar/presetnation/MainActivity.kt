@@ -1,4 +1,4 @@
-package com.udacity.asteroidradar.presatnation
+package com.udacity.asteroidradar.presetnation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,5 +1,6 @@
 package com.udacity.asteroidradar.model.network
 
+import androidx.lifecycle.LiveData
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -36,7 +37,7 @@ interface ApiService {
     @GET("/planetary/apod")
     suspend fun getImageOfTheDay(
         @Query("api_key") apiKey: String = ApiKey.API_KEY
-    )
+    ) : ImageOfTheDay
 }
 
 private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()

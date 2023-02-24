@@ -43,10 +43,12 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
 }
 
 @BindingAdapter("imageFromUrl")
-fun bindImageFromUrl(imageView: ImageView, url: String) {
+fun bindImageFromUrl(imageView: ImageView, url: String?) {
+    url?.let{
     Picasso
         .with(imageView.context)
         .load(url)
-        .placeholder(R.drawable.placeholder_picture_of_day)
+        .placeholder(R.drawable.loading_animation)
         .into(imageView)
+    }
 }

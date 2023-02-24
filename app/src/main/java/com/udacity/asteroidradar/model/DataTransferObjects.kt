@@ -1,4 +1,4 @@
-package com.udacity.asteroidradar.core
+package com.udacity.asteroidradar.model
 
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.model.database.AsteroidDatabaseEntity
