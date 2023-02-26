@@ -1,9 +1,15 @@
 package com.udacity.asteroidradar.core
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Target
 import com.udacity.asteroidradar.R
 
 @BindingAdapter("statusIcon")
@@ -44,11 +50,12 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
 
 @BindingAdapter("imageFromUrl")
 fun bindImageFromUrl(imageView: ImageView, url: String?) {
-    url?.let{
-    Picasso
-        .with(imageView.context)
-        .load(url)
-        .placeholder(R.drawable.loading_animation)
-        .into(imageView)
+    url?.let {
+        Picasso
+            .with(imageView.context)
+            .load(url)
+            .placeholder(R.drawable.loading_animation)
+            .into(imageView)
     }
 }
+

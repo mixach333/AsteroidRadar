@@ -14,16 +14,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import retrofit2.HttpException
-import java.io.IOException
+import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class RefreshAsteroidsRepository(application: Application) {
 
     private val database = AsteroidDatabase.getDatabase(application)
-    val asteroids: LiveData<List<Asteroid>> = Transformations.map(database.dao.getAllAsteroids()) {
-        it.asDomainModel()
-    }
+    val asteroids: LiveData<List<Asteroid>> =
+        Transformations.map(database.asteroidsDao.getAllAsteroids()) {
+            it.asDomainModel()
+        }
+    val imageOfTheDay: LiveData<ImageOfTheDay> =
+        Transformations.map(database.imageDao.getImageOfTheDay()) {
+            it.asDomainModel()
+        }
+
 
     suspend fun fetchAsteroids(): List<Asteroid> {
         val result: List<Asteroid>
@@ -34,25 +41,64 @@ class RefreshAsteroidsRepository(application: Application) {
                 sevenDaysRangeFromNow[1]
             )
             result = parseAsteroidsJsonResult(JSONObject(jsonString))
-            Log.d("RefreshAsteroidsRepo", "Fetch successful: $result")
+            Log.d("RefreshAsteroidsRepo", "Asteroids Fetch successful: $result")
             return result
         } catch (e: IOException) {
-            Log.e("RefreshAsteroidsRepo", "IOException occurred: ${e.localizedMessage}")
+            Log.e(
+                "RefreshAsteroidsRepo",
+                "IOException occurred for asteroids fetch: ${e.localizedMessage}"
+            )
         } catch (e: HttpException) {
-            Log.e("RefreshAsteroidsRepo", "HttpException occurred: ${e.localizedMessage}")
+            Log.e(
+                "RefreshAsteroidsRepo",
+                "HttpException occurred for asteroids fetch: ${e.localizedMessage}"
+            )
         } catch (e: Throwable) {
-            Log.e("RefreshAsteroidsRepo", "Exception occurred: ${e.localizedMessage}")
+            Log.e(
+                "RefreshAsteroidsRepo",
+                "Exception occurred for asteroids fetch: ${e.localizedMessage}"
+            )
         }
         return emptyList()
     }
 
-    suspend fun getImageOfTheDayUrl(): ImageOfTheDay {
-        return Network.retrofitService.getImageOfTheDay()
+    suspend fun getImageOfTheDayUrl(): ImageOfTheDay? {
+        try {
+            val result = Network.retrofitService.getImageOfTheDay()
+            if (result.mediaType != "image") return null
+            Log.d("RefreshAsteroidsRepo", "ImageOfTheDay Fetch successful: $result")
+            return result
+        } catch (e: IOException) {
+            Log.e(
+                "RefreshAsteroidsRepo",
+                "ImageOfTheDay fetch IOException occurred: ${e.localizedMessage}"
+            )
+        } catch (e: HttpException) {
+            Log.e(
+                "RefreshAsteroidsRepo",
+                "ImageOfTheDay fetch HttpException occurred: ${e.localizedMessage}"
+            )
+        } catch (e: Throwable) {
+            Log.e(
+                "RefreshAsteroidsRepo",
+                "ImageOfTheDay fetch Exception occurred: ${e.localizedMessage}"
+            )
+        }
+        return null
     }
 
     suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
-            database.dao.insertAll(fetchAsteroids().asDatabaseModel())
+            database.asteroidsDao.insertAll(fetchAsteroids().asDatabaseModel())
+        }
+    }
+
+    suspend fun refreshImageOfTHeDay() {
+        withContext(Dispatchers.IO) {
+            getImageOfTheDayUrl()?.let {
+                if (it.mediaType == "image")
+                    database.imageDao.insertImage(it.asDatabaseModel())
+            }
         }
     }
 
@@ -64,6 +110,5 @@ class RefreshAsteroidsRepository(application: Application) {
         val formattedEndDay = dateFormat.format(cal.time)
         return listOf(formattedToday, formattedEndDay)
     }
-
 
 }
