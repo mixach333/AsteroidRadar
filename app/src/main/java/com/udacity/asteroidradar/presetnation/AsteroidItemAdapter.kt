@@ -34,6 +34,10 @@ class AsteroidItemAdapter(val clickListener: (selectedAsteroid: Asteroid) -> Uni
                     false -> R.drawable.ic_status_normal
                 }
             )
+            ivFavorites.setImageResource(when(currentAsteroid.isSaved){
+                true -> R.drawable.ic_baseline_star_24_true
+                false -> R.drawable.ic_baseline_star_border_24_false
+            })
             root.setOnClickListener { clickListener(currentAsteroid) }
         }
     }

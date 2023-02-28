@@ -3,6 +3,7 @@ package com.udacity.asteroidradar.presetnation
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -13,7 +14,7 @@ import com.udacity.asteroidradar.model.database.DateFilter
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,11 +37,8 @@ class MainFragment : Fragment() {
 
         viewModel.asteroidList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
-            binding.asteroidRecycler.scrollToPosition(0)
         }
 
-//        viewModel.todayAsteroids.observe(viewLifecycleOwner){}
-//        viewModel.savedAsteroids.observe(viewLifecycleOwner){}
 
         viewModel.imageUrl.observe(viewLifecycleOwner) {
             binding.imageOfTheDay = it

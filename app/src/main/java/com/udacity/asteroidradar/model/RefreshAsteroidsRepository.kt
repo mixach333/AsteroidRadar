@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.model.database.AsteroidDatabase
+import com.udacity.asteroidradar.model.database.AsteroidDatabaseEntity
 import com.udacity.asteroidradar.model.database.DateFilter
 import com.udacity.asteroidradar.model.network.ImageOfTheDay
 import com.udacity.asteroidradar.model.network.Network
@@ -27,10 +28,6 @@ class RefreshAsteroidsRepository(
 
     private val database = AsteroidDatabase.getDatabase(application)
 
-//    val todayAsteroids = database.asteroidsDao.getAsteroids(today, today)
-//    val weekAsteroids = database.asteroidsDao.getAsteroids(today, sevenDayFromNow)
-//    val savedAsteroids = database.asteroidsDao.getSavedAsteroids()
-
     val todayAsteroids: LiveData<List<Asteroid>> =
         Transformations.map(database.asteroidsDao.getAsteroids(today, today)) {
             Log.d(
@@ -46,27 +43,6 @@ class RefreshAsteroidsRepository(
         Transformations.map(database.asteroidsDao.getSavedAsteroids()) {
             it.asDomainModel()
         }
-
-//    private var _asteroids = MutableLiveData<DateFilter>(DateFilter.WEEK)
-//    val asteroids = Transformations.switchMap(_asteroids){ dateFilter ->
-//        when(dateFilter){
-//            DateFilter.WEEK -> database.asteroidsDao.getAsteroids(today, sevenDayFromNow)
-//            DateFilter.TODAY -> database.asteroidsDao.getAsteroids(today, today)
-//            DateFilter.SAVED -> database.asteroidsDao.getSavedAsteroids()
-//        }
-//    }
-
-//    private var _asteroids: MutableLiveData<List<Asteroid>> =
-//        Transformations.map(database.asteroidsDao.getAsteroids(today, sevenDayFromNow)) {
-//
-//            it.asDomainModel()
-//        } as MutableLiveData<List<Asteroid>>
-
-
-//
-//    private var _asteroids: MutableLiveData<List<Asteroid>> = weekAsteroids as MutableLiveData
-//    val asteroids: LiveData<List<Asteroid>>
-//        get() = _asteroids
 
     val imageOfTheDay: LiveData<ImageOfTheDay> =
         Transformations.map(database.imageDao.getImageOfTheDay()) {
@@ -142,12 +118,9 @@ class RefreshAsteroidsRepository(
         }
     }
 
-//    fun getAsteroidsFromDatabaseByRange(filter: DateFilter) {
-//        _asteroids.value = when (filter) {
-//            DateFilter.WEEK -> weekAsteroids.value
-//            DateFilter.TODAY -> todayAsteroids.value
-//            DateFilter.SAVED -> savedAsteroids.value
-//        }
-//
-//    }
+    suspend fun updateAsteroidInDatabase(asteroidDatabaseEntity: AsteroidDatabaseEntity){
+        withContext(Dispatchers.IO){
+            database.asteroidsDao.update(asteroidDatabaseEntity)
+        }
+    }
 }

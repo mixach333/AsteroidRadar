@@ -38,6 +38,20 @@ fun List<AsteroidDatabaseEntity>.asDomainModel(): List<Asteroid> {
     }
 }
 
+fun Asteroid.asDatabaseModel() : AsteroidDatabaseEntity{
+    return AsteroidDatabaseEntity(
+        id = id,
+        codename = codename,
+        closeApproachDate = closeApproachDate,
+        absoluteMagnitude = absoluteMagnitude,
+        estimatedDiameter = estimatedDiameter,
+        relativeVelocity = relativeVelocity,
+        distanceFromEarth = distanceFromEarth,
+        isPotentiallyHazardous = isPotentiallyHazardous,
+        isSaved = isSaved
+    )
+}
+
 fun ImageOfTheDayEntity.asDomainModel(): ImageOfTheDay = ImageOfTheDay(url, mediaType, title)
 
 fun ImageOfTheDay.asDatabaseModel(): ImageOfTheDayEntity = ImageOfTheDayEntity(0L, url, mediaType, title)

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.udacity.asteroidradar.domain.*
 import com.udacity.asteroidradar.model.RefreshAsteroidsRepository
+import com.udacity.asteroidradar.model.asDatabaseModel
 import com.udacity.asteroidradar.model.asDomainModel
 import com.udacity.asteroidradar.model.database.DateFilter
 import com.udacity.asteroidradar.model.network.ImageOfTheDay
@@ -39,10 +40,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-//    val weekAsteroids = refreshAsteroidsRepository.weekAsteroids
-//    val todayAsteroids = refreshAsteroidsRepository.todayAsteroids
-//    val savedAsteroids = refreshAsteroidsRepository.savedAsteroids
-
     private val _imageUrl = refreshAsteroidsRepository.imageOfTheDay
     val imageUrl: LiveData<ImageOfTheDay>
         get() = _imageUrl
@@ -50,6 +47,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun showFilteredAsteroids(filter: DateFilter) {
         _asteroidsList.postValue(filter)
+    }
+
+    fun updateAsteroidInDatabase(asteroid: Asteroid){
+        viewModelScope.launch {
+            refreshAsteroidsRepository.updateAsteroidInDatabase(asteroid.asDatabaseModel())
+        }
     }
 
 

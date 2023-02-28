@@ -1,15 +1,9 @@
 package com.udacity.asteroidradar.core
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import com.squareup.picasso.Target
 import com.udacity.asteroidradar.R
 
 @BindingAdapter("statusIcon")
