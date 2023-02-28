@@ -2,14 +2,11 @@ package com.udacity.asteroidradar.model
 
 import android.app.Application
 import android.util.Log
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.model.database.AsteroidDatabase
 import com.udacity.asteroidradar.model.database.AsteroidDatabaseEntity
-import com.udacity.asteroidradar.model.database.DateFilter
 import com.udacity.asteroidradar.model.network.ImageOfTheDay
 import com.udacity.asteroidradar.model.network.Network
 import com.udacity.asteroidradar.model.network.parseAsteroidsJsonResult
@@ -31,7 +28,7 @@ class RefreshAsteroidsRepository(
     val todayAsteroids: LiveData<List<Asteroid>> =
         Transformations.map(database.asteroidsDao.getAsteroids(today, today)) {
             Log.d(
-                "RefreshAsteroidsRepo","Size for today asteroids retrieved from db is: ${it.size}"
+                "RefreshAsteroidsRepo", "Size for today asteroids retrieved from db is: ${it.size}"
             )
             it.asDomainModel()
         }
@@ -118,9 +115,16 @@ class RefreshAsteroidsRepository(
         }
     }
 
-    suspend fun updateAsteroidInDatabase(asteroidDatabaseEntity: AsteroidDatabaseEntity){
-        withContext(Dispatchers.IO){
+    suspend fun updateAsteroidInDatabase(asteroidDatabaseEntity: AsteroidDatabaseEntity) {
+        withContext(Dispatchers.IO) {
             database.asteroidsDao.update(asteroidDatabaseEntity)
         }
+    }
+
+    suspend fun clearAsteroidBeforeDateFromDatabase(beforeDate: String) {
+        withContext(Dispatchers.IO) {
+            database.asteroidsDao.deleteOldAsteroids(beforeDate)
+        }
+
     }
 }

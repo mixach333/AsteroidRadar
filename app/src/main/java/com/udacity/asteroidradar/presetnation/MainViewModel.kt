@@ -1,17 +1,13 @@
 package com.udacity.asteroidradar.presetnation
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.udacity.asteroidradar.domain.*
 import com.udacity.asteroidradar.model.RefreshAsteroidsRepository
 import com.udacity.asteroidradar.model.asDatabaseModel
-import com.udacity.asteroidradar.model.asDomainModel
 import com.udacity.asteroidradar.model.database.DateFilter
 import com.udacity.asteroidradar.model.network.ImageOfTheDay
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlin.system.measureTimeMillis
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
