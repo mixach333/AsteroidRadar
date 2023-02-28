@@ -16,7 +16,8 @@ fun List<Asteroid>.asDatabaseModel(): List<AsteroidDatabaseEntity> {
             estimatedDiameter = it.estimatedDiameter,
             relativeVelocity = it.relativeVelocity,
             distanceFromEarth = it.distanceFromEarth,
-            isPotentiallyHazardous = it.isPotentiallyHazardous
+            isPotentiallyHazardous = it.isPotentiallyHazardous,
+            isSaved = it.isSaved
         )
     }
 }
@@ -31,7 +32,8 @@ fun List<AsteroidDatabaseEntity>.asDomainModel(): List<Asteroid> {
             estimatedDiameter = it.estimatedDiameter,
             relativeVelocity = it.relativeVelocity,
             distanceFromEarth = it.distanceFromEarth,
-            isPotentiallyHazardous = it.isPotentiallyHazardous
+            isPotentiallyHazardous = it.isPotentiallyHazardous,
+            isSaved = it.isSaved
         )
     }
 }

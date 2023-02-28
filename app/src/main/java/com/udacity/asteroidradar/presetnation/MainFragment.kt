@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
+import com.udacity.asteroidradar.model.database.DateFilter
 
 class MainFragment : Fragment() {
 
@@ -34,10 +35,12 @@ class MainFragment : Fragment() {
         setHasOptionsMenu(true)
 
         viewModel.asteroidList.observe(viewLifecycleOwner) {
-            it.let {
-                adapter.submitList(it)
-            }
+            adapter.submitList(it)
+            binding.asteroidRecycler.scrollToPosition(0)
         }
+
+//        viewModel.todayAsteroids.observe(viewLifecycleOwner){}
+//        viewModel.savedAsteroids.observe(viewLifecycleOwner){}
 
         viewModel.imageUrl.observe(viewLifecycleOwner) {
             binding.imageOfTheDay = it
@@ -53,6 +56,11 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.show_all_menu -> viewModel.showFilteredAsteroids(DateFilter.WEEK)
+            R.id.show_saved_menu -> viewModel.showFilteredAsteroids(DateFilter.SAVED)
+            R.id.show_today_menu -> viewModel.showFilteredAsteroids(DateFilter.TODAY)
+        }
         return true
     }
 

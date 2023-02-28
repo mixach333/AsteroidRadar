@@ -14,5 +14,6 @@ data class AsteroidDatabaseEntity(
     @ColumnInfo(name = "estimated_diameter") val estimatedDiameter: Double,
     @ColumnInfo(name = "relative_velocity") val relativeVelocity: Double,
     @ColumnInfo(name = "distance_from_earth") val distanceFromEarth: Double,
-    @ColumnInfo(name = "is_potentially_hazardous") val isPotentiallyHazardous: Boolean
+    @ColumnInfo(name = "is_potentially_hazardous") val isPotentiallyHazardous: Boolean,
+    @ColumnInfo(name = "is_saved") var isSaved: Boolean = false
 )

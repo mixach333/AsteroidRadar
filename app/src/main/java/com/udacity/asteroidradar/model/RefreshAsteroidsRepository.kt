@@ -2,11 +2,13 @@ package com.udacity.asteroidradar.model
 
 import android.app.Application
 import android.util.Log
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.udacity.asteroidradar.core.Constants
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.model.database.AsteroidDatabase
+import com.udacity.asteroidradar.model.database.DateFilter
 import com.udacity.asteroidradar.model.network.ImageOfTheDay
 import com.udacity.asteroidradar.model.network.Network
 import com.udacity.asteroidradar.model.network.parseAsteroidsJsonResult
@@ -15,30 +17,68 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 
-class RefreshAsteroidsRepository(application: Application) {
+class RefreshAsteroidsRepository(
+    application: Application,
+    private val today: String,
+    private val sevenDayFromNow: String
+) {
 
     private val database = AsteroidDatabase.getDatabase(application)
-    val asteroids: LiveData<List<Asteroid>> =
-        Transformations.map(database.asteroidsDao.getAllAsteroids()) {
+
+//    val todayAsteroids = database.asteroidsDao.getAsteroids(today, today)
+//    val weekAsteroids = database.asteroidsDao.getAsteroids(today, sevenDayFromNow)
+//    val savedAsteroids = database.asteroidsDao.getSavedAsteroids()
+
+    val todayAsteroids: LiveData<List<Asteroid>> =
+        Transformations.map(database.asteroidsDao.getAsteroids(today, today)) {
+            Log.d(
+                "RefreshAsteroidsRepo","Size for today asteroids retrieved from db is: ${it.size}"
+            )
             it.asDomainModel()
         }
+    val weekAsteroids: LiveData<List<Asteroid>> =
+        Transformations.map(database.asteroidsDao.getAsteroids(today, sevenDayFromNow)) {
+            it.asDomainModel()
+        }
+    val savedAsteroids: LiveData<List<Asteroid>> =
+        Transformations.map(database.asteroidsDao.getSavedAsteroids()) {
+            it.asDomainModel()
+        }
+
+//    private var _asteroids = MutableLiveData<DateFilter>(DateFilter.WEEK)
+//    val asteroids = Transformations.switchMap(_asteroids){ dateFilter ->
+//        when(dateFilter){
+//            DateFilter.WEEK -> database.asteroidsDao.getAsteroids(today, sevenDayFromNow)
+//            DateFilter.TODAY -> database.asteroidsDao.getAsteroids(today, today)
+//            DateFilter.SAVED -> database.asteroidsDao.getSavedAsteroids()
+//        }
+//    }
+
+//    private var _asteroids: MutableLiveData<List<Asteroid>> =
+//        Transformations.map(database.asteroidsDao.getAsteroids(today, sevenDayFromNow)) {
+//
+//            it.asDomainModel()
+//        } as MutableLiveData<List<Asteroid>>
+
+
+//
+//    private var _asteroids: MutableLiveData<List<Asteroid>> = weekAsteroids as MutableLiveData
+//    val asteroids: LiveData<List<Asteroid>>
+//        get() = _asteroids
+
     val imageOfTheDay: LiveData<ImageOfTheDay> =
         Transformations.map(database.imageDao.getImageOfTheDay()) {
             it.asDomainModel()
         }
 
-
-    suspend fun fetchAsteroids(): List<Asteroid> {
+    private suspend fun fetchAsteroids(): List<Asteroid> {
         val result: List<Asteroid>
-        val sevenDaysRangeFromNow = getSevenDaysRangeFromNow()
         try {
             val jsonString = Network.retrofitService.getAsteroids(
-                sevenDaysRangeFromNow[0],
-                sevenDaysRangeFromNow[1]
+                today,
+                sevenDayFromNow
             )
             result = parseAsteroidsJsonResult(JSONObject(jsonString))
             Log.d("RefreshAsteroidsRepo", "Asteroids Fetch successful: $result")
@@ -62,7 +102,7 @@ class RefreshAsteroidsRepository(application: Application) {
         return emptyList()
     }
 
-    suspend fun getImageOfTheDayUrl(): ImageOfTheDay? {
+    private suspend fun getImageOfTheDayUrl(): ImageOfTheDay? {
         try {
             val result = Network.retrofitService.getImageOfTheDay()
             if (result.mediaType != "image") return null
@@ -102,13 +142,12 @@ class RefreshAsteroidsRepository(application: Application) {
         }
     }
 
-    private fun getSevenDaysRangeFromNow(): List<String> {
-        val cal = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
-        val formattedToday = dateFormat.format(cal.time)
-        cal.roll(Calendar.DAY_OF_YEAR, Constants.DEFAULT_END_DATE_DAYS - 1)
-        val formattedEndDay = dateFormat.format(cal.time)
-        return listOf(formattedToday, formattedEndDay)
-    }
-
+//    fun getAsteroidsFromDatabaseByRange(filter: DateFilter) {
+//        _asteroids.value = when (filter) {
+//            DateFilter.WEEK -> weekAsteroids.value
+//            DateFilter.TODAY -> todayAsteroids.value
+//            DateFilter.SAVED -> savedAsteroids.value
+//        }
+//
+//    }
 }

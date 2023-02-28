@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
 @Database(
     entities = [AsteroidDatabaseEntity::class, ImageOfTheDayEntity::class],
     //autoMigrations = [AutoMigration(from = 1, to = 2)],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class AsteroidDatabase : RoomDatabase() {

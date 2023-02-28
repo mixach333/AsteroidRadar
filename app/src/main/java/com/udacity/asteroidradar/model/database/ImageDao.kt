@@ -1,10 +1,7 @@
 package com.udacity.asteroidradar.model.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface ImageDao {
@@ -14,4 +11,7 @@ interface ImageDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertImage(image: ImageOfTheDayEntity)
+
+    @Query("DELETE FROM asteroid_database")
+    suspend fun deleteImageUrls()
 }
