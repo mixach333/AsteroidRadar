@@ -1,14 +1,12 @@
 package com.udacity.asteroidradar.model.database
 
 import android.content.Context
-import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
     entities = [AsteroidDatabaseEntity::class, ImageOfTheDayEntity::class],
-    //autoMigrations = [AutoMigration(from = 1, to = 2)],
     version = 4,
     exportSchema = false
 )

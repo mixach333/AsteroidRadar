@@ -1,6 +1,5 @@
 package com.udacity.asteroidradar.model
 
-import androidx.lifecycle.Transformations.map
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.model.database.AsteroidDatabaseEntity
 import com.udacity.asteroidradar.model.database.ImageOfTheDayEntity
