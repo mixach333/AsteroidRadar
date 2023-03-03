@@ -9,6 +9,10 @@ Technologies/libraries:
 <img src="https://img.shields.io/badge/Kotlin Coroutines-1C2149?style=for-the-badge&logo=kotlin&logoColor=blue"/>   <img src="https://img.shields.io/badge/Room-1C2149?style=for-the-badge&logo=kotlin&logoColor=blue"/>   <img src="https://img.shields.io/badge/Retrofit-1C2149?style=for-the-badge&logo=kotlin&logoColor=blue"/>
 <img src="https://img.shields.io/badge/Picasso-1C2149?style=for-the-badge&logo=kotlin&logoColor=blue"/>   <img src="https://img.shields.io/badge/Use Cases-1C2149?style=for-the-badge&logo=kotlin&logoColor=blue"/>   <img src="https://img.shields.io/badge/Unit Tests-1C2149?style=for-the-badge&logo=kotlin&logoColor=blue"/>  
 
+## Asteroid Radar
+Asteroid Radar is an Android app that allows you to view the asteroids detected by NASA that pass near Earth. You can view all the detected asteroids given a period of time with data such as the size, velocity, distance to earth, and if they are potentially hazardous. The app also displays the NASA image of the day to make it more striking.
+
+
 ## Important note
 ### The app configuration
 To use the Asteroid Radar app, you will need to obtain an API key from NASA Open APIs. Here are the steps to get your API key:
@@ -25,8 +29,6 @@ To use the Asteroid Radar app, you will need to obtain an API key from NASA Open
 ![Screenshot1](https://video.udacity-data.com/topher/2020/June/5edeac1d_screen-shot-2020-06-08-at-2.21.53-pm/screen-shot-2020-06-08-at-2.21.53-pm.png)
 ![Screenshot2](https://video.udacity-data.com/topher/2020/June/5edeac35_screen-shot-2020-06-08-at-2.22.18-pm/screen-shot-2020-06-08-at-2.22.18-pm.png)
 
-## Asteroid Radar
-Asteroid Radar is an Android app that allows you to view the asteroids detected by NASA that pass near Earth. You can view all the detected asteroids given a period of time with data such as the size, velocity, distance to earth, and if they are potentially hazardous. The app also displays the NASA image of the day to make it more striking.
 
 ## Features
 ### The app includes the following features:
