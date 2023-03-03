@@ -2,7 +2,9 @@ package com.udacity.asteroidradar.presetnation
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.udacity.asteroidradar.domain.*
+import com.udacity.asteroidradar.domain.Asteroid
+import com.udacity.asteroidradar.domain.usecases.GetSevenDateFromNowUseCase
+import com.udacity.asteroidradar.domain.usecases.GetTodaysDateUseCase
 import com.udacity.asteroidradar.model.RefreshAsteroidsRepository
 import com.udacity.asteroidradar.model.asDatabaseModel
 import com.udacity.asteroidradar.model.database.DateFilter
@@ -11,13 +13,10 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val getTodaysDateUseCase: GetTodaysDateUseCase = GetTodaysDateUseCaseImpl()
-    private val getSevenDateFromNowUseCase: GetSevenDateFromNowUseCase =
-        GetSevenDateFromNowUseCaseImpl()
     private val refreshAsteroidsRepository = RefreshAsteroidsRepository(
         application,
-        getTodaysDateUseCase.getTodaysDate(),
-        getSevenDateFromNowUseCase.getSevenDateFromNow()
+        GetTodaysDateUseCase().getDate(),
+        GetSevenDateFromNowUseCase().getDate()
     )
 
     init {

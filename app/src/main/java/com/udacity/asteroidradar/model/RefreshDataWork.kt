@@ -4,8 +4,8 @@ import android.app.Application
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.udacity.asteroidradar.domain.GetSevenDateFromNowUseCaseImpl
-import com.udacity.asteroidradar.domain.GetTodaysDateUseCaseImpl
+import com.udacity.asteroidradar.domain.usecases.GetSevenDateFromNowUseCase
+import com.udacity.asteroidradar.domain.usecases.GetTodaysDateUseCase
 
 class RefreshDataWork(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
@@ -17,12 +17,12 @@ class RefreshDataWork(appContext: Context, params: WorkerParameters) :
     override suspend fun doWork(): Result {
         val repository = RefreshAsteroidsRepository(
             applicationContext as Application,
-            GetTodaysDateUseCaseImpl().getTodaysDate(),
-            GetSevenDateFromNowUseCaseImpl().getSevenDateFromNow()
+            GetTodaysDateUseCase().getDate(),
+            GetSevenDateFromNowUseCase().getDate()
         )
         return try {
             repository.refreshAsteroids()
-            repository.clearAsteroidBeforeDateFromDatabase(GetTodaysDateUseCaseImpl().getTodaysDate())
+            repository.clearAsteroidBeforeDateFromDatabase(GetTodaysDateUseCase().getDate())
             Result.success()
         } catch (e: Exception) {
             Result.retry()
