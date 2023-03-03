@@ -30,7 +30,7 @@ fun bindContentDescription(imageView: ImageView, description: String?){
     if(!description.isNullOrEmpty()){
         imageView.contentDescription = description
     } else {
-        imageView.contentDescription = "This is place for Nasa Image of the day and it's empty right now"
+        imageView.contentDescription = imageView.context.getString(R.string.image_of_the_day_content_description_empty)
     }
 
 }
@@ -38,9 +38,9 @@ fun bindContentDescription(imageView: ImageView, description: String?){
 @BindingAdapter("isHazardousDynamicContentDescription")
 fun bindHazardousContentDescription(imageView: ImageView, isHazardous: Boolean){
     if(isHazardous){
-        imageView.contentDescription = "The asteroid is hazardous"
+        imageView.contentDescription = imageView.context.getString(R.string.asteroids_hazard_cont_descr_true)
     } else {
-        imageView.contentDescription = "The asteroid is not hazardous"
+        imageView.contentDescription = imageView.context.getString(R.string.asteroids_hazard_cont_descr_false)
     }
 }
 
