@@ -20,7 +20,8 @@ class AsteroidApplication : Application() {
     }
 
     private fun setupRecurringWork() {
-        val constraints = Constraints.Builder().apply{
+        val constraints = Constraints.Builder()
+            .apply{
             setRequiredNetworkType(NetworkType.UNMETERED)
             setRequiresBatteryNotLow(true)
             setRequiresCharging(true)

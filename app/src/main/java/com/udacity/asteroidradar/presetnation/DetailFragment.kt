@@ -35,12 +35,14 @@ class DetailFragment : Fragment() {
                 displayAstronomicalUnitExplanationDialog()
             }
 
-            ivFavoritesDetailScreen.setOnClickListener{
+            ivFavoritesDetailScreen.setOnClickListener {
 
-                if(asteroid.isSaved){
+                if (asteroid.isSaved) {
                     asteroid.isSaved = false
                     viewModel.updateAsteroidInDatabase(asteroid)
                     ivFavoritesDetailScreen.setImageResource(R.drawable.ic_baseline_star_border_24_false)
+
+
                 } else {
                     asteroid.isSaved = true
                     viewModel.updateAsteroidInDatabase(asteroid)
@@ -59,5 +61,6 @@ class DetailFragment : Fragment() {
             .setPositiveButton(android.R.string.ok, null)
         builder.create().show()
     }
+
 
 }

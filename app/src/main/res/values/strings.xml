@@ -22,4 +22,11 @@
     <string name="image_of_the_day_content_description_empty">This is the place for Nasa Image of the day and it\'s empty right now</string>
     <string name="asteroids_hazard_cont_descr_true">The asteroid is hazardous</string>
     <string name="asteroids_hazard_cont_descr_false">The asteroid is not hazardous</string>
+    <string name="notification_channel_asteroids_update_id" translatable="false">asteroids channel</string>
+    <string name="notification_channel_asteroids_update_name" translatable="false">Asteroids</string>
+    <string name="notification_channel_image_update_id" translatable="false">image channel id</string>
+    <string name="notification_channel_image_update_name" translatable="false">Image channel</string>
+    <string name="asteroids_notification_title">Updated Asteroids</string>
+    <string name="asteroids_notification_message_success">The asteroids list was updated, new close approaching asteroids added</string>
+    <string name="asteroids_notification_message_failure">The asteroids list was not updated, the error occurred</string>
 </resources>

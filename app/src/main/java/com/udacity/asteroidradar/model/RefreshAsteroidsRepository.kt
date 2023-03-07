@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import retrofit2.HttpException
-import java.io.*
+import java.io.IOException
 
 
 class RefreshAsteroidsRepository(
