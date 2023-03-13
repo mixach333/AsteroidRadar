@@ -1,8 +1,12 @@
 package com.udacity.asteroidradar
 
 import android.app.Application
+import android.app.NotificationManager
 import android.os.Build
+import androidx.core.content.ContextCompat
 import androidx.work.*
+import com.udacity.asteroidradar.core.notifications.createAsteroidsUpdateChannel
+import com.udacity.asteroidradar.core.notifications.createFirebaseUpdateChannel
 import com.udacity.asteroidradar.model.RefreshDataWork
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +32,8 @@ class AsteroidApplication : Application() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 setRequiresDeviceIdle(true)
             }
-        }.build()
+        }
+            .build()
 
         val repeatingRequest
                 = PeriodicWorkRequestBuilder<RefreshDataWork>(1, TimeUnit.DAYS)
@@ -39,6 +44,18 @@ class AsteroidApplication : Application() {
             RefreshDataWork.WORK_NAME,
             ExistingPeriodicWorkPolicy.KEEP,
             repeatingRequest)
+    }
+
+    private fun setupFirebaseNotifications(){
+        val notificationManager =
+            ContextCompat.getSystemService(
+                applicationContext,
+                NotificationManager::class.java
+            ) as NotificationManager
+        notificationManager.createFirebaseUpdateChannel(
+            applicationContext.getString(R.string.update_notification_channel_id),
+            applicationContext.getString(R.string.notification_channel_asteroids_update_name)
+        )
     }
 
     override fun onCreate() {

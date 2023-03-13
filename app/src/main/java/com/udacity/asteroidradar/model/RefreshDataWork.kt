@@ -10,8 +10,8 @@ import androidx.work.WorkerParameters
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.domain.usecases.GetSevenDateFromNowUseCase
 import com.udacity.asteroidradar.domain.usecases.GetTodaysDateUseCase
-import com.udacity.asteroidradar.presetnation.notifications.createAsteroidsUpdateChannel
-import com.udacity.asteroidradar.presetnation.notifications.sendNotification
+import com.udacity.asteroidradar.core.notifications.createAsteroidsUpdateChannel
+import com.udacity.asteroidradar.core.notifications.sendNotification
 
 class RefreshDataWork(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {

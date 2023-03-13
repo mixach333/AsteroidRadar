@@ -1,5 +1,6 @@
-package com.udacity.asteroidradar.presetnation.notifications
+package com.udacity.asteroidradar.core.notifications
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -48,6 +49,22 @@ fun NotificationManager.createAsteroidsUpdateChannel(channelId: String, channelN
             lightColor = Color.RED
             enableVibration(true)
             description = "Network Update"
+        }
+        createNotificationChannel(notificationChannel)
+    }
+}
+
+fun NotificationManager.createFirebaseUpdateChannel(channelId: String, channelName: String) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val notificationChannel = NotificationChannel(
+            channelId,
+            channelName,
+            NotificationManager.IMPORTANCE_HIGH
+        ).apply {
+            enableLights(true)
+            lightColor = Color.RED
+            enableVibration(true)
+            description = "Firebase Network Update"
         }
         createNotificationChannel(notificationChannel)
     }
