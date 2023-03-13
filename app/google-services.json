@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "814658740595",
+    "project_id": "fcm-asteroids-notifications",
+    "storage_bucket": "fcm-asteroids-notifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814658740595:android:de0fdce966e6f53f0c2506",
+        "android_client_info": {
+          "package_name": "com.udacity.asteroidradar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814658740595-5krpif0hm10mpdmc8tu6p0v30nudo7bg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO_SNVtC5pFSvmLhnFPQyYSP59ycPKGOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814658740595-5krpif0hm10mpdmc8tu6p0v30nudo7bg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

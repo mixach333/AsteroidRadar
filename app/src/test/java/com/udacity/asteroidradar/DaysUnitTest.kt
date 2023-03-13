@@ -3,9 +3,8 @@ package com.udacity.asteroidradar
 import com.udacity.asteroidradar.core.Constants
 import com.udacity.asteroidradar.domain.usecases.GetSevenDateFromNowUseCase
 import com.udacity.asteroidradar.domain.usecases.GetTodaysDateUseCase
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 import java.text.SimpleDateFormat
 import java.util.*
 
