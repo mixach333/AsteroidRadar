@@ -30,4 +30,6 @@
     <string name="asteroids_notification_message_success">The asteroids list was updated, new close approaching asteroids added</string>
     <string name="asteroids_notification_message_failure">The asteroids list was not updated, the error occurred</string>
     <string name="update_notification_channel_id">firebase updated asteroids</string>
+    <string name="message_subscribed">Subscribed to Asteroids Updates</string>
+    <string name="message_subscribe_failed">Failed to subscribe to Asteroids Updates</string>
 </resources>

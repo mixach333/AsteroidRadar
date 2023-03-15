@@ -4,8 +4,9 @@ import android.app.Application
 import android.app.NotificationManager
 import android.os.Build
 import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker
 import androidx.work.*
-import com.udacity.asteroidradar.core.notifications.createAsteroidsUpdateChannel
+import com.google.firebase.messaging.FirebaseMessaging
 import com.udacity.asteroidradar.core.notifications.createFirebaseUpdateChannel
 import com.udacity.asteroidradar.model.RefreshDataWork
 import kotlinx.coroutines.CoroutineScope
@@ -56,10 +57,12 @@ class AsteroidApplication : Application() {
             applicationContext.getString(R.string.update_notification_channel_id),
             applicationContext.getString(R.string.notification_channel_asteroids_update_name)
         )
+        FirebaseMessaging.getInstance().subscribeToTopic("Asteroids_updates")
     }
 
     override fun onCreate() {
         super.onCreate()
         delayedInit()
+        setupFirebaseNotifications()
     }
 }

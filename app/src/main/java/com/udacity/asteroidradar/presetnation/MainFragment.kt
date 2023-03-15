@@ -42,7 +42,7 @@ class MainFragment : Fragment() {
         viewModel.imageUrl.observe(viewLifecycleOwner) {
             binding.imageOfTheDay = it
         }
-
+        viewModel.subscribeToAsteroidsTopic()
         return binding.root
     }
 
