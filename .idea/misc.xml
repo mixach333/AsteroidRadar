@@ -4,20 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/N315/AppData/Local/Android/Sdk/platforms/android-30/data/res/drawable/btn_star.xml" value="0.1795" />
+        <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.192" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/error.xml" value="0.159" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/favorites_star_true.xml" value="0.1785" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/ic_baseline_star_24_true.xml" value="0.1795" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/ic_baseline_star_border_24_false.xml" value="0.1795" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/ic_help_circle.xml" value="0.325" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/ic_launcher_background.xml" value="0.308" />
+        <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/ic_launcher_new_background.xml" value="0.192" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/ic_status_normal.xml" value="0.325" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/ic_status_potentially_hazardous.xml" value="0.308" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/loading_img.xml" value="0.16" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/drawable/placeholder_picture_of_day.xml" value="0.295" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/layout/activity_main.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/layout/asteroid_item.xml" value="0.4" />
-        <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/layout/fragment_detail.xml" value="0.28403908794788274" />
+        <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/layout/fragment_detail.xml" value="0.25" />
         <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/layout/fragment_main.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.192" />
+        <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/mipmap-anydpi-v26/ic_launcher_new.xml" value="0.192" />
+        <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/mipmap-anydpi-v26/ic_launcher_new_round.xml" value="0.192" />
+        <entry key="..\:/Users/N315/Desktop/Andro/nd940-android-kotlin-c2-starter-master/starter/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.192" />
       </map>
     </option>
   </component>
