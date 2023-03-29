@@ -84,7 +84,7 @@ class RefreshAsteroidsRepository(
         } catch (e: IOException) {
             Log.e(
                 "RefreshAsteroidsRepo",
-                "ImageOfTheDay fetch IOException occurred: ${e.localizedMessage}"
+                "ImageOfTheDay fetch IOException occurred: $e"
             )
         } catch (e: HttpException) {
             Log.e(

@@ -2,9 +2,9 @@ package com.udacity.asteroidradar.presetnation
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.udacity.asteroidradar.R
@@ -26,18 +26,32 @@ class MainFragment : Fragment() {
         }
 
         with(binding) {
-            lifecycleOwner = this@MainFragment
+            lifecycleOwner = viewLifecycleOwner
             viewModel = viewModel
             asteroidRecycler.adapter = adapter
             asteroidRecycler.layoutManager = LinearLayoutManager(requireContext())
         }
 
-        setHasOptionsMenu(true)
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+                menuInflater.inflate(R.menu.main_overflow_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    R.id.show_all_menu -> viewModel.showFilteredAsteroids(DateFilter.WEEK)
+                    R.id.show_saved_menu -> viewModel.showFilteredAsteroids(DateFilter.SAVED)
+                    R.id.show_today_menu -> viewModel.showFilteredAsteroids(DateFilter.TODAY)
+                }
+                return true
+            }
+        }, this.viewLifecycleOwner)
+        //setHasOptionsMenu(true)
 
         viewModel.asteroidList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
-
 
         viewModel.imageUrl.observe(viewLifecycleOwner) {
             binding.imageOfTheDay = it
@@ -45,21 +59,5 @@ class MainFragment : Fragment() {
         viewModel.subscribeToAsteroidsTopic()
         return binding.root
     }
-
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_overflow_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.show_all_menu -> viewModel.showFilteredAsteroids(DateFilter.WEEK)
-            R.id.show_saved_menu -> viewModel.showFilteredAsteroids(DateFilter.SAVED)
-            R.id.show_today_menu -> viewModel.showFilteredAsteroids(DateFilter.TODAY)
-        }
-        return true
-    }
-
 
 }

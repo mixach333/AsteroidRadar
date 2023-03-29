@@ -20,7 +20,7 @@ interface AsteroidsDao {
     fun getSavedAsteroids(): LiveData<List<AsteroidDatabaseEntity>>
 
     @Query("DELETE FROM asteroid_database WHERE close_approach_date<:oldDate AND is_saved = 0")
-    suspend fun deleteOldAsteroids(oldDate: String)
+    suspend fun deleteOldAsteroids(oldDate: String) : Int
 
     @Update
     suspend fun update(asteroidDatabaseEntity: AsteroidDatabaseEntity)

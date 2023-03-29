@@ -1,6 +1,5 @@
 package com.udacity.asteroidradar.core.notifications
 
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -13,8 +12,6 @@ import com.udacity.asteroidradar.presetnation.MainActivity
 import android.app.PendingIntent as PendingIntent1
 
 private const val NOTIFICATION_ID = 0
-private const val REQUEST_CODE = 0
-private const val FLAGS = 0
 
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
     val notificationIntent = Intent(applicationContext, MainActivity::class.java)
@@ -22,7 +19,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         applicationContext,
         NOTIFICATION_ID,
         notificationIntent,
-        PendingIntent1.FLAG_UPDATE_CURRENT
+        PendingIntent1.FLAG_IMMUTABLE or PendingIntent1.FLAG_UPDATE_CURRENT
     )
 
     val builder = NotificationCompat.Builder(

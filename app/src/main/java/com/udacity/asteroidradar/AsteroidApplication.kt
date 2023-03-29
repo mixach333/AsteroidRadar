@@ -2,9 +2,7 @@ package com.udacity.asteroidradar
 
 import android.app.Application
 import android.app.NotificationManager
-import android.os.Build
 import androidx.core.content.ContextCompat
-import androidx.core.content.PermissionChecker
 import androidx.work.*
 import com.google.firebase.messaging.FirebaseMessaging
 import com.udacity.asteroidradar.core.notifications.createFirebaseUpdateChannel
@@ -30,9 +28,8 @@ class AsteroidApplication : Application() {
             setRequiredNetworkType(NetworkType.UNMETERED)
             setRequiresBatteryNotLow(true)
             setRequiresCharging(true)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                setRequiresDeviceIdle(true)
-            }
+            setRequiresDeviceIdle(true)
+
         }
             .build()
 
@@ -41,7 +38,7 @@ class AsteroidApplication : Application() {
             .setConstraints(constraints)
             .build()
 
-        WorkManager.getInstance().enqueueUniquePeriodicWork(
+        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
             RefreshDataWork.WORK_NAME,
             ExistingPeriodicWorkPolicy.KEEP,
             repeatingRequest)

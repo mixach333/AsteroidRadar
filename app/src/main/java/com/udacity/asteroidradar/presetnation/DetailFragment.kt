@@ -23,7 +23,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentDetailBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val asteroid = DetailFragmentArgs.fromBundle(
             requireArguments()
@@ -97,21 +97,21 @@ class DetailFragment : Fragment() {
         animatorSetFalse.duration = 300L
 
         animatorSetTrue.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationStart(animation: Animator?) {
+            override fun onAnimationStart(animation: Animator) {
                 view.isEnabled = false
             }
 
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 view.isEnabled = true
             }
         })
 
         animatorSetFalse.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationStart(animation: Animator?) {
+            override fun onAnimationStart(animation: Animator) {
                 view.isEnabled = false
             }
 
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 view.isEnabled = true
             }
         })
@@ -154,7 +154,7 @@ class DetailFragment : Fragment() {
         set.duration = (Math.random() * 1500 + 500).toLong()
 
         set.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 container.removeView(newStar)
             }
         })
