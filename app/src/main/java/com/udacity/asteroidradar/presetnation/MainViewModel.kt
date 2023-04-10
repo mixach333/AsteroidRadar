@@ -10,9 +10,19 @@ import com.udacity.asteroidradar.model.RefreshAsteroidsRepository
 import com.udacity.asteroidradar.model.asDatabaseModel
 import com.udacity.asteroidradar.model.database.DateFilter
 import com.udacity.asteroidradar.model.network.ImageOfTheDay
+import com.udacity.asteroidradar.presetnation.login.AuthenticationState
+import com.udacity.asteroidradar.presetnation.login.FirebaseUserLiveData
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
+
+    val authenticationState = FirebaseUserLiveData().map{user ->
+        if(user!=null){
+            AuthenticationState.AUTHENTICATED
+        } else {
+            AuthenticationState.UNAUTHENTICATED
+        }
+    }
 
     private val refreshAsteroidsRepository = RefreshAsteroidsRepository(
         application,
