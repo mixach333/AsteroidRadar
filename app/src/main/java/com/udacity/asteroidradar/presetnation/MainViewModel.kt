@@ -2,7 +2,9 @@ package com.udacity.asteroidradar.presetnation
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessaging
+import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.usecases.GetSevenDateFromNowUseCase
 import com.udacity.asteroidradar.domain.usecases.GetTodaysDateUseCase
@@ -14,10 +16,9 @@ import com.udacity.asteroidradar.presetnation.login.AuthenticationState
 import com.udacity.asteroidradar.presetnation.login.FirebaseUserLiveData
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
-
-    val authenticationState = FirebaseUserLiveData().map{user ->
-        if(user!=null){
+class MainViewModel(private val application: Application) : AndroidViewModel(application) {
+    val authenticationState = FirebaseUserLiveData().map { user ->
+        if (user != null) {
             AuthenticationState.AUTHENTICATED
         } else {
             AuthenticationState.UNAUTHENTICATED
@@ -55,7 +56,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _asteroidsList.postValue(filter)
     }
 
-    fun updateAsteroidInDatabase(asteroid: Asteroid){
+    fun updateAsteroidInDatabase(asteroid: Asteroid) {
         viewModelScope.launch {
             refreshAsteroidsRepository.updateAsteroidInDatabase(asteroid.asDatabaseModel())
         }
@@ -63,6 +64,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun subscribeToAsteroidsTopic() {
         FirebaseMessaging.getInstance().subscribeToTopic("Asteroids_updates")
+    }
+
+    fun getCurrentUserName(): String {
+        val userName = FirebaseAuth.getInstance().currentUser?.displayName?:"Guest"
+        return application.getString(R.string.main_screen_user_name, userName)
     }
 
 }

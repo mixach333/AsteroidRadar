@@ -6,21 +6,42 @@
     tools:context=".presetnation.login.LoginFragment"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:background="@drawable/gradient_background"
+    android:padding="16dp"
    >
 
     <TextView
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:id="@+id/welcome_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_message"
+        android:textSize="22sp"
+        />
+
+    <TextView
+        android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
         android:id="@+id/login_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="22sp"/>
+        android:text="@string/login_text_please_login"
+        android:textSize="22sp"
+        />
+    <View android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1">
+
+    </View>
 
     <Button
+        android:layout_margin="80dp"
         android:id="@+id/login_logout_button"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Log In"
-        android:textSize="32sp"/>
+        android:text="@string/log_in"
+        android:textSize="32sp"
+        android:background="@drawable/round_corners_view"/>
 
 </LinearLayout>

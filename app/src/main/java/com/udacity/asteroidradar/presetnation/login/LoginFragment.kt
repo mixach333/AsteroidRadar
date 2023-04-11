@@ -35,8 +35,6 @@ class LoginFragment : Fragment() {
     )
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,41 +62,23 @@ class LoginFragment : Fragment() {
     }
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
-            if (result.resultCode == RESULT_OK) {
-                Log.d(
-                    "onActivityResultLogin",
-                    "Login successful ${FirebaseAuth.getInstance().currentUser?.displayName}"
-                )
-            } else {
-                Log.d("onActivityResultLogin", "Login unsuccessful: ${result.idpResponse?.error}")
-            }
+        if (result.resultCode == RESULT_OK) {
+            Log.d(
+                "onActivityResultLogin",
+                "Login successful ${FirebaseAuth.getInstance().currentUser?.displayName}"
+            )
+        } else {
+            Log.d("onActivityResultLogin", "Login unsuccessful: ${result.idpResponse?.error}")
+        }
 
     }
 
     private fun observeAuthenticationState() {
+        binding.loginLogoutButton.setOnClickListener {
+            launchSignInFlow()
+        }
         viewModel.authenticationState.observe(viewLifecycleOwner) { authenticationState ->
-            when (authenticationState) {
-                AuthenticationState.AUTHENTICATED -> {
-//                    binding.loginText.text =
-//                        "Current user is ${FirebaseAuth.getInstance().currentUser?.displayName}"
-                    binding.loginLogoutButton.apply {
-                        text = "Log Out"
-                        setOnClickListener {
-                            AuthUI.getInstance().signOut(requireContext())
-                        }
-                    }
-                    findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
-                }
-                else -> {
-                    binding.loginText.text = "You are Unauthenticated"
-                    binding.loginLogoutButton.apply {
-                        text = "Log In"
-                        setOnClickListener {
-                            launchSignInFlow()
-                        }
-                    }
-                }
-            }
+            if (authenticationState == AuthenticationState.AUTHENTICATED) findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
         }
     }
 }

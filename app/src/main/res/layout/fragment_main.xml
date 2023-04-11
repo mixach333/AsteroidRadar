@@ -46,8 +46,7 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:layout_gravity="bottom"
-                android:background="#55010613"
-                android:text="@string/image_of_the_day" />
+                android:background="#55010613" />
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView

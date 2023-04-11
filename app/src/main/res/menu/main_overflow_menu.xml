@@ -10,4 +10,7 @@
     <item
         android:id="@+id/show_saved_menu"
         android:title="@string/saved_asteroids" />
+    <item
+        android:id="@+id/log_out_menu_item"
+        android:title="@string/log_out" />
 </menu>
